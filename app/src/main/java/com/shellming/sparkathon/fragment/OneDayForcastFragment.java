@@ -15,6 +15,7 @@ import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.utils.ColorTemplate;
 import com.shellming.sparkathon.R;
 import com.shellming.sparkathon.model.MyMessage;
 import com.shellming.sparkathon.model.Weather;
@@ -98,6 +99,7 @@ public class OneDayForcastFragment extends Fragment {
         dataSet.setLineWidth(5.0f);
         dataSet.setDrawCircleHole(false);
         dataSet.setDrawValues(false);
+        dataSet.setColors(ColorTemplate.VORDIPLOM_COLORS);
         LineData data = new LineData(labels, dataSet);
         data.addDataSet(dataSet);
         chart.setData(data);
@@ -124,7 +126,14 @@ public class OneDayForcastFragment extends Fragment {
         chart.setDescription("");
         chart.setDrawGridBackground(false);
         chart.getLegend().setEnabled(false);
-
+        chart.setClickable(false);
+        chart.setTouchEnabled(false);
+        chart.setDragEnabled(false);
+        chart.setScaleEnabled(false);
+        chart.setPinchZoom(false);
+        chart.setDoubleTapToZoomEnabled(false);
+        chart.setHighlightPerDragEnabled(false);
+        chart.setHighlightPerTapEnabled(false);
     }
 
     @Nullable
