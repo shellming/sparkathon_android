@@ -29,6 +29,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.shellming.sparkathon.R;
 import com.shellming.sparkathon.adapter.MyViewPagerAdapter;
+import com.shellming.sparkathon.api.WeatherApi;
 import com.shellming.sparkathon.constant.GlobalConstant;
 import com.shellming.sparkathon.fragment.IndexFragment;
 import com.shellming.sparkathon.fragment.OneDayForcastFragment;
@@ -39,10 +40,13 @@ import com.shellming.sparkathon.util.LocationUtil;
 import com.shellming.sparkathon.util.TwitterUtil;
 import com.shellming.sparkathon.util.UserUtil;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 
 import de.greenrobot.event.EventBus;
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -128,10 +132,34 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    private void init(){
+        DisplayImageOptions defaultOptions = new DisplayImageOptions.Builder()
+                .cacheOnDisk(true)
+                .cacheInMemory(true)
+                .build();
+        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(getApplicationContext())
+                .defaultDisplayImageOptions(defaultOptions)
+                .build();
+        ImageLoader.getInstance().init(config);
+
+        try {
+            InputStream propertyStream = getAssets().open("conf.properties");
+            Properties properties = new Properties();
+            properties.load(propertyStream);
+            WeatherApi.WEATHER_USER = properties.getProperty("weather.username");
+            WeatherApi.WEATHER_PASS = properties.getProperty("weather.password");
+            WeatherApi.URL_TEMPLATE = properties.getProperty("weather.url");
+            System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!! url" + WeatherApi.URL_TEMPLATE);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EventBus.getDefault().register(this);
+        init();
 
         System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! enter activity");
         setContentView(R.layout.activity_main);
@@ -145,15 +173,6 @@ public class MainActivity extends AppCompatActivity {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.fragment_container, new IndexFragment());
         transaction.commit();
-
-        DisplayImageOptions defaultOptions = new DisplayImageOptions.Builder()
-                .cacheOnDisk(true)
-                .cacheInMemory(true)
-                .build();
-        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(getApplicationContext())
-                .defaultDisplayImageOptions(defaultOptions)
-                .build();
-        ImageLoader.getInstance().init(config);
 
         if (UserUtil.isLogin(getApplicationContext())) {
             new TwitterGetUserInfoTask().execute();

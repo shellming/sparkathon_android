@@ -18,4 +18,5 @@
     <color name="theme_dialer_high">#0277BD</color>
     <color name="theme_dialer_primary">#0288D1</color>
     <color name="theme_dialer_accent">#FFF</color>
+    <color name="divide">#e0e0e0</color>
 </resources>

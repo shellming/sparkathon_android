@@ -27,3 +27,4 @@ proguard/
 *.log
 /.gradle
 /.idea
+conf.properties

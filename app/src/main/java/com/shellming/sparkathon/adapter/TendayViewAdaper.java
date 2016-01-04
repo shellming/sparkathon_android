@@ -1,5 +1,7 @@
 package com.shellming.sparkathon.adapter;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +10,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.shellming.sparkathon.R;
+import com.shellming.sparkathon.activity.MainActivity;
+import com.shellming.sparkathon.activity.SendTwitterActivity;
 import com.shellming.sparkathon.model.Weather;
 
 import java.util.List;
@@ -18,16 +22,19 @@ import java.util.Map;
  */
 public class TendayViewAdaper extends RecyclerView.Adapter<TendayViewAdaper.ViewHolder> {
     private List<Weather> data;
+    private List<Double> runExps;
+    private Context context1;
 
-    public TendayViewAdaper(List<Weather> data) {
+    public TendayViewAdaper(List<Weather> data, Context context) {
         this.data = data;
+        this.context1 = context;
     }
 
     @Override
     public TendayViewAdaper.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_weather_card, parent, false);
-        return new ViewHolder(view, data);
+        return new ViewHolder(view, data, context1);
     }
 
     @Override
@@ -35,11 +42,12 @@ public class TendayViewAdaper extends RecyclerView.Adapter<TendayViewAdaper.View
         Weather weather = data.get(position);
         holder.mTempView.setText(weather.getTemp().toString());
         holder.mDesView.setText(weather.getWeatherDesc());
-        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!desc:" + weather.getWeatherDesc());
-        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!sunrise:" + weather.getSunrise());
         holder.mWeatherImgView.setImageResource(weather.getIcon());
         holder.mDateTime.setText(weather.getFormatDate());
         holder.mDegreeView.setText("℃");
+        if(runExps != null){
+            holder.mExpView.setText("Run Exp:" + runExps.get(position));
+        }
     }
 
     @Override
@@ -52,6 +60,11 @@ public class TendayViewAdaper extends RecyclerView.Adapter<TendayViewAdaper.View
         notifyDataSetChanged();
     }
 
+    public void setRunExps(List<Double> runExps){
+        this.runExps = runExps;
+        notifyDataSetChanged();
+    }
+
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private List<Weather> data;
         public final View mView;
@@ -61,8 +74,9 @@ public class TendayViewAdaper extends RecyclerView.Adapter<TendayViewAdaper.View
         public ImageView mWeatherImgView;
         public TextView mDateTime;
         public TextView mDegreeView;
+        public TextView mExpView;
 
-        public ViewHolder(View view, List<Weather> data) {
+        public ViewHolder(View view, List<Weather> data, final Context context) {
             super(view);
             mView = view;
             this.data = data;
@@ -72,6 +86,18 @@ public class TendayViewAdaper extends RecyclerView.Adapter<TendayViewAdaper.View
             mWeatherImgView = (ImageView) mView.findViewById(R.id.weatherImg);
             mDateTime = (TextView) mView.findViewById(R.id.data_time);
             mDegreeView = (TextView) mView.findViewById(R.id.degree);
+            mExpView = (TextView) mView.findViewById(R.id.run_exp);
+
+            mView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(context, SendTwitterActivity.class);
+                    String dateTime = mDateTime.getText().toString();
+                    String[] parts = dateTime.split(",");
+                    intent.putExtra("date", parts[0]);
+                    context.startActivity(intent);
+                }
+            });
         }
 
         @Override

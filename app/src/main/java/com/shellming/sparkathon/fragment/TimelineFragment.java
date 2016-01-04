@@ -16,6 +16,7 @@ import com.getbase.floatingactionbutton.FloatingActionsMenu;
 import com.shellming.sparkathon.R;
 import com.shellming.sparkathon.adapter.TimelineRecyclerViewAdapter;
 import com.shellming.sparkathon.constant.GlobalConstant;
+import com.shellming.sparkathon.model.TwitterModel;
 import com.shellming.sparkathon.util.ToastUtil;
 import com.shellming.sparkathon.util.TwitterUtil;
 import com.shellming.sparkathon.util.UserUtil;
@@ -26,6 +27,7 @@ import java.util.List;
 import twitter4j.GeoLocation;
 import twitter4j.Query;
 import twitter4j.QueryResult;
+import twitter4j.Status;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
 
@@ -98,12 +100,12 @@ public class TimelineFragment extends Fragment {
 //                    }
 //                }
 //            });
-//            swipeRefreshLayout.post(new Runnable() {
-//                @Override
-//                public void run() {
-//                    swipeRefreshLayout.setRefreshing(true);
-//                }
-//            });
+            swipeRefreshLayout.post(new Runnable() {
+                @Override
+                public void run() {
+                    swipeRefreshLayout.setRefreshing(true);
+                }
+            });
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -123,6 +125,7 @@ public class TimelineFragment extends Fragment {
                 ToastUtil.showToast(getContext(), "get timeline error", Toast.LENGTH_SHORT);
                 return;
             }
+            System.out.println("!!!!!!!!!!!!!!!!!!! timeline size:" + list.size());
             adapter.setData(list);
         }
 
@@ -131,20 +134,27 @@ public class TimelineFragment extends Fragment {
             if(!UserUtil.isLogin(getContext()))
                 return new ArrayList();
             Query query = new Query(params[0]);
+//            query.since("2015-12-01");
 //            Double latitude = Double.valueOf(GlobalConstant.latitude);
 //            Double longitude = Double.valueOf(GlobalConstant.logitude);
 //            GeoLocation location = new GeoLocation(latitude, longitude);
 //            query.setGeoCode(location, 5, Query.Unit.km);
             Twitter twitter = TwitterUtil.getInstance().getTwitter();
             try {
-                QueryResult result =twitter.search(query);
-                return result.getTweets();
+                QueryResult result = twitter.search(query);
+                System.out.println("get since" + query.getSince());
+                List<twitter4j.Status> statuses = result.getTweets();
+                List<TwitterModel> models = new ArrayList<>();
+                for(int i = 0; i < statuses.size(); i++){
+                    TwitterModel model = TwitterModel.fromTwitter(statuses.get(i));
+                    if(model != null)
+                        models.add(model);
+                }
+                return models;
             } catch (TwitterException e) {
                 e.printStackTrace();
                 return null;
             }
         }
     }
-
-
 }

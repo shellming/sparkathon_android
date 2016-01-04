@@ -12,4 +12,5 @@
     <string name="wet">Humidity</string>
     <string name="pressure">Pressure</string>
     <string name="visit">Visibility</string>
+    <string name="send">Send</string>
 </resources>

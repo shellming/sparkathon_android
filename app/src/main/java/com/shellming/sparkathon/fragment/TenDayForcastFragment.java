@@ -1,5 +1,6 @@
 package com.shellming.sparkathon.fragment;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -16,11 +17,21 @@ import com.shellming.sparkathon.adapter.TendayViewAdaper;
 import com.shellming.sparkathon.api.WeatherApi;
 import com.shellming.sparkathon.constant.GlobalConstant;
 import com.shellming.sparkathon.model.MyMessage;
+import com.shellming.sparkathon.model.RunExpModel;
 import com.shellming.sparkathon.model.Weather;
+import com.squareup.okhttp.Call;
+import com.squareup.okhttp.MediaType;
+import com.squareup.okhttp.OkHttpClient;
+import com.squareup.okhttp.Request;
+import com.squareup.okhttp.RequestBody;
+import com.squareup.okhttp.Response;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import de.greenrobot.event.EventBus;
 
@@ -37,8 +48,8 @@ public class TenDayForcastFragment extends Fragment {
         View mView =inflater.inflate(R.layout.fragment_tenday, container, false);
 
         recyclerView = (RecyclerView) mView.findViewById(R.id.recyclerview);
-
         setupRecylerView();
+
         return mView;
     }
 
@@ -48,6 +59,7 @@ public class TenDayForcastFragment extends Fragment {
                 List<Weather> data = (List<Weather>) message.data;
                 data.remove(0);
                 adapter.setData(data);
+                new AnalysisRunExpTask().execute(data.toArray(new Weather[0]));
             }
 
         }
@@ -57,7 +69,7 @@ public class TenDayForcastFragment extends Fragment {
         try {
             linearLayoutManager = new LinearLayoutManager(getContext());
             recyclerView.setLayoutManager(linearLayoutManager);
-            adapter = new TendayViewAdaper(new ArrayList<Weather>());
+            adapter = new TendayViewAdaper(new ArrayList<Weather>(), getContext());
             recyclerView.setAdapter(adapter);
         } catch (Exception e) {
             e.printStackTrace();
@@ -74,5 +86,45 @@ public class TenDayForcastFragment extends Fragment {
     public void onDestroy() {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
+    }
+
+    class AnalysisRunExpTask extends AsyncTask<Weather, Integer, String>{
+
+        @Override
+        protected void onPostExecute(String s) {
+            Gson gson = new Gson();
+            List<Double> result = gson.fromJson(s, List.class);
+            adapter.setRunExps(result);
+        }
+
+        @Override
+        protected String doInBackground(Weather... params) {
+            try {
+                List<RunExpModel> models = new ArrayList<>();
+                for(Weather weather : params){
+                    models.add(RunExpModel.fromWeather(weather));
+                }
+                Gson gson = new Gson();
+                String content = gson.toJson(models);
+                System.out.println("!!!!!!!!!!!!!!!!!!!!!!!! runexp data " + content);
+                OkHttpClient client = new OkHttpClient();
+                client.setConnectTimeout(15, TimeUnit.SECONDS);
+                client.setReadTimeout(15, TimeUnit.SECONDS);
+
+                String url = GlobalConstant.RUN_EXP_URL;
+                MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+                RequestBody requestBody = RequestBody.create(JSON, content);
+                Request request = new Request.Builder().url(url).post(requestBody).build();
+                Call call = client.newCall(request);
+
+                Response response = call.execute();
+                return response.body().string();
+            } catch (Exception e) {
+                e.printStackTrace();
+                System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!! run exp error");
+                return null;
+            }
+
+        }
     }
 }

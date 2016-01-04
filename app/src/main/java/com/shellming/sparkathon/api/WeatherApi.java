@@ -1,5 +1,7 @@
 package com.shellming.sparkathon.api;
 
+import android.content.res.AssetManager;
+
 import com.google.gson.Gson;
 import com.shellming.sparkathon.model.MyMessage;
 import com.shellming.sparkathon.model.Weather;
@@ -32,10 +34,12 @@ import de.greenrobot.event.EventBus;
  * Created by ruluo1992 on 11/30/2015.
  */
 public class WeatherApi {
-    private static String URL_TEMPLATE = "https://twcservice.mybluemix.net:443/api/weather%s?units=m&geocode=%s,%s&language=en-US";
+    public static String URL_TEMPLATE = "";
     private static String CURRENT = "/v2/observations/current";
     private static String TEN_DAYS_LATER = "/v2/forecast/daily/10day";
     private static String ONE_DAY_LATER = "/v2/forecast/hourly/24hour";
+    public static String WEATHER_USER = "";
+    public static String WEATHER_PASS = "";  // read from conf.properties when main activity created
 
     private static OkHttpClient client = new OkHttpClient();
 
@@ -57,7 +61,7 @@ public class WeatherApi {
         client.setAuthenticator(new Authenticator() {
             @Override
             public Request authenticate(Proxy proxy, Response response) throws IOException {
-                String credential = Credentials.basic("449ed3cf-b721-4d15-b8ff-ee932aecc63a", "Rb9LMNclIq");
+                String credential = Credentials.basic(WEATHER_USER, WEATHER_PASS);
                 return response.request().newBuilder().header("Authorization", credential).build();
             }
 

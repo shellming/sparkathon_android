@@ -49,7 +49,7 @@ public class OneDayForcastFragment extends Fragment {
     }
 
     public void onEventMainThread(MyMessage message) {
-        if(message.type == MyMessage.Type.FORCAST_24HOUR){
+        if(message.type == MyMessage.Type.FORCAST_24HOUR && message.data != null){
             List<Weather> weathers = (List<Weather>) message.data;
             List<String> labels = new ArrayList<>();
 
@@ -86,20 +86,20 @@ public class OneDayForcastFragment extends Fragment {
                 labels.add(String.valueOf(x));
             }
 
-            setData("Temperature", temperatureEnties, labels, temperatureChart);
-            setData("WindSpeed", windEnties, labels, windChart);
-            setData("Humidity", wetEnties, labels, wetChart);
-            setData("Visibility", visitEnties, labels, visitChart);
-            setData("Pressure", pressureEnties, labels, pressureChart);
+            setData("Temperature", temperatureEnties, labels, temperatureChart, 0);
+            setData("WindSpeed", windEnties, labels, windChart, 1);
+            setData("Humidity", wetEnties, labels, wetChart, 2);
+            setData("Visibility", visitEnties, labels, visitChart, 3);
+            setData("Pressure", pressureEnties, labels, pressureChart, 4);
         }
     }
 
-    private void setData(String title, List<Entry> entries, List<String> labels, LineChart chart){
+    private void setData(String title, List<Entry> entries, List<String> labels, LineChart chart, int index){
         LineDataSet dataSet = new LineDataSet(entries, title);
         dataSet.setLineWidth(5.0f);
         dataSet.setDrawCircleHole(false);
         dataSet.setDrawValues(false);
-        dataSet.setColors(ColorTemplate.VORDIPLOM_COLORS);
+        dataSet.setColor(ColorTemplate.VORDIPLOM_COLORS[index]);
         LineData data = new LineData(labels, dataSet);
         data.addDataSet(dataSet);
         chart.setData(data);
@@ -114,7 +114,6 @@ public class OneDayForcastFragment extends Fragment {
 
         YAxis yAxis = chart.getAxisLeft();
         yAxis.setDrawGridLines(false);
-//        yAxis.setDrawLabels(false);
         yAxis.setDrawAxisLine(false);
         yAxis.setStartAtZero(false);
 
@@ -145,15 +144,6 @@ public class OneDayForcastFragment extends Fragment {
         wetChart = (LineChart) mView.findViewById(R.id.wet_chart);
         visitChart = (LineChart) mView.findViewById(R.id.visit_chart);
         pressureChart = (LineChart) mView.findViewById(R.id.pressure_chart);
-
-//        String[] xLabels = new String[24];
-//        for(int i = 0; i < 24; i++){
-//            xLabels[i] = String.valueOf(i);
-//        }
-//
-//        LineData data = new LineData(xLabels);
-//        temperatureChart.setData(data);
-//        windChart.setData(data);
 
         setupChart(temperatureChart);
         setupChart(windChart);

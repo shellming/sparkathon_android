@@ -28,12 +28,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/temperature"
-                    android:textSize="24sp"
-                    android:layout_marginBottom="8dp"/>
+                    android:textSize="24sp"/>
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="4dp"
+                    android:background="@color/divide"/>
                 <com.github.mikephil.charting.charts.LineChart
                     android:id="@+id/temperature_chart"
                     android:layout_width="match_parent"
-                    android:layout_height="190dp" />
+                    android:layout_height="190dp"
+                    android:layout_marginTop="8dp"/>
             </LinearLayout>
         </android.support.v7.widget.CardView>
 
@@ -55,8 +59,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/wind"
-                    android:textSize="24sp"
-                    android:layout_marginBottom="8dp"/>
+                    android:textSize="24sp"/>
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="4dp"
+                    android:background="@color/divide"/>
                 <com.github.mikephil.charting.charts.LineChart
                     android:id="@+id/wind_chart"
                     android:layout_width="match_parent"
@@ -82,8 +89,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/wet"
-                    android:textSize="24sp"
-                    android:layout_marginBottom="8dp"/>
+                    android:textSize="24sp"/>
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="4dp"
+                    android:background="@color/divide"/>
                 <com.github.mikephil.charting.charts.LineChart
                     android:id="@+id/wet_chart"
                     android:layout_width="match_parent"
@@ -109,8 +119,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/visit"
-                    android:textSize="24sp"
-                    android:layout_marginBottom="8dp"/>
+                    android:textSize="24sp"/>
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="4dp"
+                    android:background="@color/divide"/>
                 <com.github.mikephil.charting.charts.LineChart
                     android:id="@+id/visit_chart"
                     android:layout_width="match_parent"
@@ -126,7 +139,8 @@
             android:layout_marginTop="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
-            card_view:cardCornerRadius="2dp">
+            card_view:cardCornerRadius="2dp"
+            android:layout_marginBottom="8dp">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -136,8 +150,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/pressure"
-                    android:textSize="24sp"
-                    android:layout_marginBottom="8dp"/>
+                    android:textSize="24sp"/>
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="4dp"
+                    android:background="@color/divide"/>
                 <com.github.mikephil.charting.charts.LineChart
                     android:id="@+id/pressure_chart"
                     android:layout_width="match_parent"

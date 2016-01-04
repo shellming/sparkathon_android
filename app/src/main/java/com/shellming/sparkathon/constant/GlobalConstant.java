@@ -18,4 +18,6 @@ public class GlobalConstant {
     public static final Integer DEFAULT_AVATAR = R.drawable.avatar;
 
     public static final String TWITTER_TAG = "#SmartRunnerBIT";
+
+    public static final String RUN_EXP_URL = "http://sparkathon.mybluemix.net/exp/cal";
 }

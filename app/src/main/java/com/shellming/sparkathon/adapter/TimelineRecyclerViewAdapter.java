@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.shellming.sparkathon.R;
+import com.shellming.sparkathon.model.TwitterModel;
 
 import java.util.List;
 import java.util.zip.Inflater;
@@ -55,12 +56,12 @@ public class TimelineRecyclerViewAdapter extends RecyclerView.Adapter<TimelineRe
 
     @Override
     public void onBindViewHolder(TimelineRecyclerViewAdapter.ViewHolder holder, int position) {
-        Status status = (Status) data.get(position);
-        String content = status.getText();
-        holder.location.setText(content);
-        holder.time.setText(content);
-        holder.like.setText(String.valueOf(status.getFavoriteCount()));
-        ImageLoader.getInstance().displayImage(status.getUser().getProfileImageURL(), holder.avatar);
+        TwitterModel model = (TwitterModel) data.get(position);
+
+        holder.location.setText(model.getLocation());
+        holder.time.setText(model.getDateTime());
+        holder.like.setText(String.valueOf(model.getLike()));
+        ImageLoader.getInstance().displayImage(model.getAvatar(), holder.avatar);
     }
 
     @Override

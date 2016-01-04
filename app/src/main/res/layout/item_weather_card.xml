@@ -71,6 +71,17 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true" />
 
+            <TextView
+                android:id="@+id/run_exp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/description"
+                android:layout_alignParentRight="true"
+                android:textSize="20sp"
+                android:textColor="@color/font_lignt"
+                android:layout_marginRight="8dp"
+                />
+
 
 
         </RelativeLayout>
