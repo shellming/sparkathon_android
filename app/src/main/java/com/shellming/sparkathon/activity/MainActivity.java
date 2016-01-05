@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
             ImageLoader.getInstance().displayImage(avatar, mAvatar);
             mUsername.setText(username);
             mUserinfo.setText(sign);
-            mUserExtra.setText("Touch avatar to logout");
+            mUserExtra.setText("Tap avatar to logout");
             try {
                 AccessToken token = UserUtil.getAccessToken(getApplicationContext());
                 twitterStream.setOAuthAccessToken(token);

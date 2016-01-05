@@ -13,6 +13,8 @@ public class TwitterModel {
     private String location;
     private Integer like;
     private String avatar;
+    private boolean isFavorite;
+    private Long twitterId;
 
     public static TwitterModel fromTwitter(Status status){
         String content = status.getText();
@@ -24,8 +26,13 @@ public class TwitterModel {
         if(!parts[0].equals(GlobalConstant.TWITTER_TAG))
             return null;
 
-        TwitterModel model = new TwitterModel(parts[1], parts[2], status.getFavoriteCount());
+        String location = parts[1].split(":")[1].trim();
+        String dateTime = parts[2].split(":")[1].trim();
+        TwitterModel model = new TwitterModel(dateTime, location, status.getFavoriteCount());
         model.setAvatar(status.getUser().getProfileImageURL());
+        model.setFavorite(status.isFavorited());
+        System.out.println("!!!!!!!!!!!!!!!!!1 is favorite " + status.isFavorited());
+        model.setTwitterId(status.getId());
         return model;
     }
 
@@ -48,6 +55,22 @@ public class TwitterModel {
                 location,
                 dateTime);
         return content;
+    }
+
+    public Long getTwitterId() {
+        return twitterId;
+    }
+
+    public void setTwitterId(Long twitterId) {
+        this.twitterId = twitterId;
+    }
+
+    public boolean isFavorite() {
+        return isFavorite;
+    }
+
+    public void setFavorite(boolean favorite) {
+        isFavorite = favorite;
     }
 
     public String getDateTime() {

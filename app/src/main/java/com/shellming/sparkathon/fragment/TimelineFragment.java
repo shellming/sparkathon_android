@@ -134,7 +134,6 @@ public class TimelineFragment extends Fragment {
             if(!UserUtil.isLogin(getContext()))
                 return new ArrayList();
             Query query = new Query(params[0]);
-//            query.since("2015-12-01");
 //            Double latitude = Double.valueOf(GlobalConstant.latitude);
 //            Double longitude = Double.valueOf(GlobalConstant.logitude);
 //            GeoLocation location = new GeoLocation(latitude, longitude);
@@ -143,7 +142,12 @@ public class TimelineFragment extends Fragment {
             try {
                 QueryResult result = twitter.search(query);
                 System.out.println("get since" + query.getSince());
-                List<twitter4j.Status> statuses = result.getTweets();
+                List<twitter4j.Status> tweets = result.getTweets();
+                List<twitter4j.Status> statuses = new ArrayList<>();
+                for(int i = 0; i < tweets.size(); i++){
+                    twitter4j.Status status = twitter.showStatus(tweets.get(i).getId());
+                    statuses.add(status);
+                }
                 List<TwitterModel> models = new ArrayList<>();
                 for(int i = 0; i < statuses.size(); i++){
                     TwitterModel model = TwitterModel.fromTwitter(statuses.get(i));

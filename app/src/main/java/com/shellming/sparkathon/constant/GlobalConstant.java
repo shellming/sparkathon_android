@@ -14,7 +14,7 @@ public class GlobalConstant {
     public static String latitude;  // 纬度
     public static String logitude;  // 经度
 
-    public static final String DEFAULT_USERNAME = "Touch avatar to login";
+    public static final String DEFAULT_USERNAME = "Tap avatar to login";
     public static final Integer DEFAULT_AVATAR = R.drawable.avatar;
 
     public static final String TWITTER_TAG = "#SmartRunnerBIT";
