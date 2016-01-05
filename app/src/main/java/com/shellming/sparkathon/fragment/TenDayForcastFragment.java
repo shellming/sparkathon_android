@@ -106,7 +106,6 @@ public class TenDayForcastFragment extends Fragment {
                 }
                 Gson gson = new Gson();
                 String content = gson.toJson(models);
-                System.out.println("!!!!!!!!!!!!!!!!!!!!!!!! runexp data " + content);
                 OkHttpClient client = new OkHttpClient();
                 client.setConnectTimeout(15, TimeUnit.SECONDS);
                 client.setReadTimeout(15, TimeUnit.SECONDS);
@@ -121,7 +120,6 @@ public class TenDayForcastFragment extends Fragment {
                 return response.body().string();
             } catch (Exception e) {
                 e.printStackTrace();
-                System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!! run exp error");
                 return null;
             }
 

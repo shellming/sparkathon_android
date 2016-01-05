@@ -25,7 +25,6 @@ public class TwitterService extends Service {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                System.out.println("!!!!!!!!!!!! one task");
             }
         }, 2000);
     }

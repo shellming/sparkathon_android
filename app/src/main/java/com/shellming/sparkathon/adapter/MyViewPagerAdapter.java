@@ -32,16 +32,6 @@ public class MyViewPagerAdapter extends FragmentStatePagerAdapter  {
         return mFragments.size();
     }
 
-//    public void setIndex(int index){
-//        this.index = index;
-//        System.out.print("!!!!!!!!!!!!! new index:" + index);
-//        notifyDataSetChanged();
-//    }
-
-//    public int getItemPosition(Object object) {
-//        return POSITION_NONE;
-//    }
-
     @Override
     public CharSequence getPageTitle(int position) {
         return mTitles.get(position);

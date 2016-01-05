@@ -50,7 +50,6 @@ class GoogleMapApiCallback implements Callback {
     public void onResponse(Response response) throws IOException {
         String responseStr =  response.body().string();
 
-        System.out.println("!!!!!!!!!!!!!! request successed!" + responseStr);
         System.out.println(response.request().url());
         Gson gson = new Gson();
         Map map = gson.fromJson(responseStr, HashMap.class);

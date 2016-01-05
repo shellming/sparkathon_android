@@ -63,7 +63,6 @@ public class IndexFragment extends Fragment {
             private FloatingActionsMenu fb;
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! position:" + position);
                 if(position != lastPosition){
                     if(fb == null)
                         fb = (FloatingActionsMenu) getActivity().findViewById(R.id.multiple_actions);

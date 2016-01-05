@@ -106,7 +106,6 @@ class WeatherApiCallback implements Callback {
         msg.what = 1;
         msg.type = type;
         EventBus.getDefault().post(msg);
-        System.out.println("!!!!!!!!!!!!!!!!!!! request failed!");
         e.printStackTrace();
     }
 
@@ -114,7 +113,6 @@ class WeatherApiCallback implements Callback {
     public void onResponse(Response response) throws IOException {
         String responseStr =  response.body().string();
 
-        System.out.println("!!!!!!!!!!!!!! request successed!" + responseStr);
         System.out.println(response.request().url());
         Gson gson = new Gson();
         WeatherResponse wResponse = (WeatherResponse) gson.fromJson(responseStr, entityClass);

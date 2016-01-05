@@ -33,13 +33,10 @@ public class LocationUtil {
             locationManager = (LocationManager) context.getSystemService(serviceName);
 
             if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                System.out.println("!!!!!!!!!! have no permission");
                 return;
             }
 
             Location location = getLastKnownLocation(locationManager);
-            System.out.println("!!!!!!!!!!!!!!!!!!!!!! altitude" + location.getAltitude());
-            System.out.println("!!!!!!!!!!!!!!!!!!!!! logitude:" + location.getLongitude());
 
             GlobalConstant.latitude = String.format("%.2f", location.getLatitude());
             GlobalConstant.logitude = String.format("%.2f", location.getLongitude());
@@ -48,9 +45,6 @@ public class LocationUtil {
             GlobalConstant.logitude = "84.50";
             ToastUtil.showToast(context, "Get Location Error", Toast.LENGTH_SHORT);
         }
-//        lock.writeLock().unlock();
-//        WeatherApi.getCurrentWeather(GlobalConstant.latitude, GlobalConstant.logitude);
-//        WeatherApi.getTendayForecast(GlobalConstant.latitude, GlobalConstant.logitude);
         GoogleMapApi.getCityName(GlobalConstant.latitude, GlobalConstant.logitude);
     }
 

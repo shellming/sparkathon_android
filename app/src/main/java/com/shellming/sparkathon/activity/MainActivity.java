@@ -64,8 +64,6 @@ public class MainActivity extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
     private int currentSelected;
 
-//    private Map<Integer, Integer> menuId2Index;
-
     private CircleImageView mAvatar;
     private TextView mUsername;
     private TextView mUserinfo;
@@ -127,7 +125,6 @@ public class MainActivity extends AppCompatActivity {
             String oauthVerifier = uri.getQueryParameter("oauth_verifier");
             RequestToken requestToken = TwitterUtil.getInstance().getRequestToken();
             String oauthToken = uri.getQueryParameter("oauth_token");
-            System.out.println("!!!!!!!!!!!!! oauthverifier:" + oauthVerifier);
             new TwitterGetAccessTokenTask().execute(oauthVerifier);
         }
     }
@@ -149,7 +146,6 @@ public class MainActivity extends AppCompatActivity {
             WeatherApi.WEATHER_USER = properties.getProperty("weather.username");
             WeatherApi.WEATHER_PASS = properties.getProperty("weather.password");
             WeatherApi.URL_TEMPLATE = properties.getProperty("weather.url");
-            System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!! url" + WeatherApi.URL_TEMPLATE);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -161,7 +157,6 @@ public class MainActivity extends AppCompatActivity {
         EventBus.getDefault().register(this);
         init();
 
-        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! enter activity");
         setContentView(R.layout.activity_main);
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -179,7 +174,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
         LocationUtil.getLocation(getApplicationContext());
-        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! leave activity");
     }
 
     @Override
@@ -222,7 +216,6 @@ public class MainActivity extends AppCompatActivity {
                                 FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
                                 transaction.replace(R.id.fragment_container, fragment);
                                 transaction.commit();
-                                System.out.println("!!!!!!!!!!!!!! fragment commit:" + fragment);
                             }
 //                            viewPagerAdapter.setIndex(currentSelected);
                         }
@@ -276,7 +269,6 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(RequestToken requestToken) {
             Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(requestToken.getAuthenticationURL()));
-            System.out.println("!!!!!!!!!!!!!!!!!!!! " + requestToken.getAuthenticationURL());
             startActivity(intent);
         }
 
@@ -313,7 +305,6 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(User user) {
-            System.out.println("//!!!!!!!!!!!!!!!!!!! get user" + user);
             MainActivity.this.refreshUser(user);
         }
 

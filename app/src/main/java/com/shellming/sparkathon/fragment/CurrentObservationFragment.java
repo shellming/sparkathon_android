@@ -106,7 +106,6 @@ public class CurrentObservationFragment extends Fragment {
     }
 
     public void onEventMainThread(MyMessage message) {
-        System.out.println("!!!!!!!!!!!!! get message" + message);
         if(message.type == MyMessage.Type.OBSERVATION_CURRENT) {
             if(message.what == 0){
                 List<Weather> weathers = (List<Weather>) message.data;

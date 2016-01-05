@@ -71,7 +71,6 @@ public class TimelineFragment extends Fragment {
             @Override
             public void onRefresh() {
                 swipeRefreshLayout.setRefreshing(true);
-                System.out.println("!!!!!!!!!!!!!!!!!!!!!!! is refreshing");
                 new TimelineRefreshTask().execute(GlobalConstant.TWITTER_TAG);
             }
         });
@@ -125,7 +124,6 @@ public class TimelineFragment extends Fragment {
                 ToastUtil.showToast(getContext(), "get timeline error", Toast.LENGTH_SHORT);
                 return;
             }
-            System.out.println("!!!!!!!!!!!!!!!!!!! timeline size:" + list.size());
             adapter.setData(list);
         }
 
