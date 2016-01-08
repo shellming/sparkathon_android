@@ -13,6 +13,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.getbase.floatingactionbutton.FloatingActionButton;
+import com.getbase.floatingactionbutton.FloatingActionsMenu;
 import com.shellming.sparkathon.R;
 import com.shellming.sparkathon.adapter.RecylerViewAdapter;
 import com.shellming.sparkathon.api.WeatherApi;
@@ -61,6 +63,9 @@ public class CurrentObservationFragment extends Fragment {
         mDateTime = (TextView) swipeRefreshLayout.findViewById(R.id.data_time);
         mDegreeView = (TextView) swipeRefreshLayout.findViewById(R.id.degree);
 
+        FloatingActionsMenu actionsMenu = (FloatingActionsMenu) getActivity().findViewById(R.id.multiple_actions);
+
+        setupActionButton(actionsMenu);
         setupRecylerView();
         setupSwipeRefreshLayout();
 
@@ -81,6 +86,25 @@ public class CurrentObservationFragment extends Fragment {
     public void onDestroy() {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
+    }
+
+    private void setupActionButton(final FloatingActionsMenu menu){
+        FloatingActionButton rightBtn = (FloatingActionButton) menu.findViewById(R.id.action_right);
+        FloatingActionButton wrongBtn = (FloatingActionButton) menu.findViewById(R.id.action_wrong);
+        rightBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ToastUtil.showToast(getContext(), "Thanks for your feedback!", Toast.LENGTH_SHORT);
+                menu.collapseImmediately();
+            }
+        });
+        wrongBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ToastUtil.showToast(getContext(), "Thanks for your feedback!", Toast.LENGTH_SHORT);
+                menu.collapseImmediately();
+            }
+        });
     }
 
     private void setupRecylerView(){
@@ -118,8 +142,6 @@ public class CurrentObservationFragment extends Fragment {
                 mWeatherImgView.setImageResource(weather.getIcon());
                 mDateTime.setText(weather.getFormatDate());
                 mDegreeView.setText("℃");
-
-                System.out.println("!!!!!!!!!!!!get weather data:" + data);
             }else {
                 ToastUtil.showToast(getContext(), "刷新失败", Toast.LENGTH_SHORT);
             }

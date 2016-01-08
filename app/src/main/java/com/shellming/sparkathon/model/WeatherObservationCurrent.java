@@ -33,6 +33,7 @@ public class WeatherObservationCurrent implements WeatherResponse{
         private String wxman;           //户外活动指数，Example: wx1050
         private Integer icon_code;      //图标标号
         private String dow;             //星期几
+        private Integer icon_extd;      // 天气描述编号
         private Metric metric;
 
         @Override
@@ -83,6 +84,11 @@ public class WeatherObservationCurrent implements WeatherResponse{
         @Override
         public Double getPressure() {
             return metric.mslp;
+        }
+
+        @Override
+        public Integer getDecCode() {
+            return icon_extd;
         }
     }
 

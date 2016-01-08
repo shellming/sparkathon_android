@@ -209,22 +209,18 @@ public class MainActivity extends AppCompatActivity {
                                 case R.id.timeline:
                                     fragment = new TimelineFragment();
                                     break;
-                                case R.id.notifaction:
-                                    break;
                             }
                             if(fragment != null){
                                 FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
                                 transaction.replace(R.id.fragment_container, fragment);
                                 transaction.commit();
                             }
-//                            viewPagerAdapter.setIndex(currentSelected);
                         }
                         mDrawerLayout.closeDrawers();
                         return true;
                     }
                 });
         View headerView = navigationView.getHeaderView(0);
-//        View headerView = findViewById(R.id.header);
         mAvatar = (CircleImageView) headerView.findViewById(R.id.profile_image);
         mAvatar.setOnClickListener(new View.OnClickListener() {
             @Override

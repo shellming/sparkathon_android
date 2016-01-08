@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Sparkathon</string>
     <string name="action_settings">Settings</string>
-    <string name="index">index</string>
+    <string name="index">Index</string>
     <string name="first_menu">first menu</string>
     <string name="username">shellming</string>
     <string name="no_login">NO LOGIN</string>

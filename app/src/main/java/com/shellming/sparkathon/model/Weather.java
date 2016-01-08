@@ -14,4 +14,5 @@ public interface Weather {
     public String getSunrise();         // 获取日出时间
     public String getSunset();          // 获取日落时间
     public Double getPressure();        // 获取压强
+    public Integer getDecCode();        // 天气描述编码
 }

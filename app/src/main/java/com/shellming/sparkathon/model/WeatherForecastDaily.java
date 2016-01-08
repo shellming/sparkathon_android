@@ -31,6 +31,7 @@ public class WeatherForecastDaily implements WeatherResponse{
         private Integer temp;           //温度，摄氏度
         private Integer rh;             //相对湿度，%
         private String phrase_32char;     //天气描述，可以指定语言
+        private Integer icon_extd;      // 天气描述编号
     }
 
     class ForecastDaily extends AbstractWeather implements Weather{
@@ -94,6 +95,11 @@ public class WeatherForecastDaily implements WeatherResponse{
         @Override
         public Double getPressure() {
             return day.mslp;
+        }
+
+        @Override
+        public Integer getDecCode() {
+            return day.icon_extd;
         }
     }
 }

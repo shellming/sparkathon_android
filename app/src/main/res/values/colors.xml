@@ -19,4 +19,7 @@
     <color name="theme_dialer_primary">#0288D1</color>
     <color name="theme_dialer_accent">#FFF</color>
     <color name="divide">#e0e0e0</color>
+
+    <color name="wrong">#eb4f38</color>
+    <color name="right">#11cd6e</color>
 </resources>

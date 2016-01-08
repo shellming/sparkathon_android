@@ -31,8 +31,8 @@ public class TwitterModel {
         TwitterModel model = new TwitterModel(dateTime, location, status.getFavoriteCount());
         model.setAvatar(status.getUser().getProfileImageURL());
         model.setFavorite(status.isFavorited());
-        System.out.println("!!!!!!!!!!!!!!!!!1 is favorite " + status.isFavorited());
         model.setTwitterId(status.getId());
+
         return model;
     }
 
@@ -50,7 +50,7 @@ public class TwitterModel {
 
     @Override
     public String toString() {
-        String content = String.format("%s\nLocation : %s\nTime : %s",
+        String content = String.format("%s\nLocation : %s\nTime : %s\nTap like if you want to join!",
                 GlobalConstant.TWITTER_TAG,
                 location,
                 dateTime);

@@ -76,19 +76,22 @@
         android:animateLayoutChanges="true">
 
         <com.getbase.floatingactionbutton.FloatingActionButton
-            android:id="@+id/action_a"
+            android:id="@+id/action_right"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            fab:fab_colorNormal="#ffffff"
+            fab:fab_colorNormal="@color/right"
             fab:fab_title="Action A"
-            fab:fab_size="mini"/>
+            fab:fab_size="mini"
+            fab:fab_icon="@drawable/ic_correct"/>
 
         <com.getbase.floatingactionbutton.FloatingActionButton
-            android:id="@+id/action_b"
+            android:id="@+id/action_wrong"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             fab:fab_title="Action with a very long name that won\'t fit on the screen"
-            fab:fab_size="mini"/>
+            fab:fab_size="mini"
+            fab:fab_icon="@drawable/ic_wrong"
+            fab:fab_colorNormal="@color/wrong"/>
 
     </com.getbase.floatingactionbutton.FloatingActionsMenu>
 
