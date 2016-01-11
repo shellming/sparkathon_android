@@ -31,6 +31,30 @@ public class RunExpModel {
         return model;
     }
 
+    public Integer getDescCode() {
+        return descCode;
+    }
+
+    public void setDescCode(Integer descCode) {
+        this.descCode = descCode;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Double getExp() {
+        return exp;
+    }
+
+    public void setExp(Double exp) {
+        this.exp = exp;
+    }
+
     public String getUser() {
         return user;
     }

@@ -15,4 +15,5 @@ public interface Weather {
     public String getSunset();          // 获取日落时间
     public Double getPressure();        // 获取压强
     public Integer getDecCode();        // 天气描述编码
+    public Integer getDefaultRunExp();  // 默认跑步指数，以高尔夫指数估算
 }

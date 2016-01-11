@@ -12,7 +12,9 @@ import android.widget.TextView;
 import com.shellming.sparkathon.R;
 import com.shellming.sparkathon.activity.MainActivity;
 import com.shellming.sparkathon.activity.SendTwitterActivity;
+import com.shellming.sparkathon.constant.GlobalConstant;
 import com.shellming.sparkathon.model.Weather;
+import com.shellming.sparkathon.model.WeatherForecastDaily;
 
 import java.util.List;
 import java.util.Map;
@@ -45,6 +47,15 @@ public class TendayViewAdaper extends RecyclerView.Adapter<TendayViewAdaper.View
         holder.mWeatherImgView.setImageResource(weather.getIcon());
         holder.mDateTime.setText(weather.getFormatDate());
         holder.mDegreeView.setText("℃");
+        Integer exp = weather.getDefaultRunExp();
+        if(exp != -1){
+            holder.mExpView.setText("Run Exp:" + exp);
+//            holder.expressionImgView.setImageResource(R.drawable.smile);
+            if(exp > GlobalConstant.THRESHOLD)
+                holder.expressionImgView.setImageResource(R.drawable.smile);
+            else
+                holder.expressionImgView.setImageResource(R.drawable.cry);
+        }
         if(runExps != null){
             holder.mExpView.setText("Run Exp:" + runExps.get(position));
         }
@@ -75,6 +86,7 @@ public class TendayViewAdaper extends RecyclerView.Adapter<TendayViewAdaper.View
         public TextView mDateTime;
         public TextView mDegreeView;
         public TextView mExpView;
+        public ImageView expressionImgView;
 
         public ViewHolder(View view, List<Weather> data, final Context context) {
             super(view);
@@ -87,6 +99,7 @@ public class TendayViewAdaper extends RecyclerView.Adapter<TendayViewAdaper.View
             mDateTime = (TextView) mView.findViewById(R.id.data_time);
             mDegreeView = (TextView) mView.findViewById(R.id.degree);
             mExpView = (TextView) mView.findViewById(R.id.run_exp);
+            expressionImgView = (ImageView) mView.findViewById(R.id.expression);
 
             mView.setOnClickListener(new View.OnClickListener() {
                 @Override

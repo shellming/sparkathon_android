@@ -90,6 +90,11 @@ public class WeatherObservationCurrent implements WeatherResponse{
         public Integer getDecCode() {
             return icon_extd;
         }
+
+        @Override
+        public Integer getDefaultRunExp() {
+            return -1;
+        }
     }
 
     class Metric {

@@ -59,7 +59,7 @@ public class TenDayForcastFragment extends Fragment {
                 List<Weather> data = (List<Weather>) message.data;
                 data.remove(0);
                 adapter.setData(data);
-                new AnalysisRunExpTask().execute(data.toArray(new Weather[0]));
+//                new AnalysisRunExpTask().execute(data.toArray(new Weather[0]));
             }
 
         }

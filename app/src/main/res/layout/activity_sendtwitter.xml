@@ -55,6 +55,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="SEND"
+            android:textColor="@color/font_lignt"
+            android:background="?attr/colorPrimary"
             android:id="@+id/send_btn"
             android:layout_below="@id/location"
             style="?android:attr/borderlessButtonStyle"

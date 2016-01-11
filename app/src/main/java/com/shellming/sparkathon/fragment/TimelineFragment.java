@@ -81,30 +81,15 @@ public class TimelineFragment extends Fragment {
             linearLayoutManager = new LinearLayoutManager(getContext());
             recyclerView.setLayoutManager(linearLayoutManager);
             recyclerView.setAdapter(adapter);
-            new TimelineRefreshTask().execute(GlobalConstant.TWITTER_TAG);
-//            recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-//
-//                @Override
-//                public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-//                    int visibleItemCount = linearLayoutManager.getChildCount();
-//                    int totalItemCount = linearLayoutManager.getItemCount();
-//                    int pastItems = linearLayoutManager.findFirstVisibleItemPosition();
-//
-//                    if (!onLoading) {
-//                        if ((pastItems + visibleItemCount) >= totalItemCount) {
-//                            ToastUtil.showToast(getContext(), "loading...", Toast.LENGTH_LONG);
-//                            onLoading = true;
-//                            currentPage++;
-//                        }
-//                    }
-//                }
-//            });
-            swipeRefreshLayout.post(new Runnable() {
-                @Override
-                public void run() {
-                    swipeRefreshLayout.setRefreshing(true);
-                }
-            });
+            if(UserUtil.isLogin(getContext())) {
+                new TimelineRefreshTask().execute(GlobalConstant.TWITTER_TAG);
+                swipeRefreshLayout.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        swipeRefreshLayout.setRefreshing(true);
+                    }
+                });
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
