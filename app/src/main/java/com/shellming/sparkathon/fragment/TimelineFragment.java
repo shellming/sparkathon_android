@@ -124,13 +124,16 @@ public class TimelineFragment extends Fragment {
             Twitter twitter = TwitterUtil.getInstance().getTwitter();
             try {
                 QueryResult result = twitter.search(query);
-                System.out.println("get since" + query.getSince());
+//                System.out.println("get since" + query.getSince());
                 List<twitter4j.Status> tweets = result.getTweets();
+                System.out.println("!!!!!!!!!!!!! result obj" + tweets);
+                System.out.println("!!!!!!!!!!!!!!!!!! result num:" + tweets.size());
                 List<twitter4j.Status> statuses = new ArrayList<>();
                 for(int i = 0; i < tweets.size(); i++){
                     twitter4j.Status status = twitter.showStatus(tweets.get(i).getId());
                     statuses.add(status);
                 }
+                System.out.println("!!!!!!!!!!! status size :" + statuses.size());
                 List<TwitterModel> models = new ArrayList<>();
                 for(int i = 0; i < statuses.size(); i++){
                     TwitterModel model = TwitterModel.fromTwitter(statuses.get(i));

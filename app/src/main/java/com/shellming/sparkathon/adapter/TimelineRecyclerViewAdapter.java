@@ -39,6 +39,7 @@ public class TimelineRecyclerViewAdapter extends RecyclerView.Adapter<TimelineRe
         public TextView time;
         public TextView like;
         public CircleImageView avatar;
+        public TextView userName;
         public ImageView likeIcon;
         public boolean isLiked = false;
         public Long twitterId;
@@ -50,6 +51,7 @@ public class TimelineRecyclerViewAdapter extends RecyclerView.Adapter<TimelineRe
             time = (TextView) itemView.findViewById(R.id.run_time);
             avatar = (CircleImageView) itemView.findViewById(R.id.avatar);
             likeIcon = (ImageView) itemView.findViewById(R.id.run_like_icon);
+            userName = (TextView) itemView.findViewById(R.id.username);
 
             likeIcon.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -122,6 +124,7 @@ public class TimelineRecyclerViewAdapter extends RecyclerView.Adapter<TimelineRe
         holder.location.setText(model.getLocation());
         holder.time.setText(model.getDateTime());
         holder.like.setText(String.valueOf(model.getLike()));
+        holder.userName.setText("@" + model.getUserName());
         ImageLoader.getInstance().displayImage(model.getAvatar(), holder.avatar);
         holder.twitterId = model.getTwitterId();
         if(model.isFavorite()) {

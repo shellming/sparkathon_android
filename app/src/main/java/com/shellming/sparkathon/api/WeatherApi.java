@@ -112,7 +112,11 @@ class WeatherApiCallback implements Callback {
     @Override
     public void onResponse(Response response) throws IOException {
         String responseStr =  response.body().string();
-
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         System.out.println(response.request().url());
         Gson gson = new Gson();
         WeatherResponse wResponse = (WeatherResponse) gson.fromJson(responseStr, entityClass);

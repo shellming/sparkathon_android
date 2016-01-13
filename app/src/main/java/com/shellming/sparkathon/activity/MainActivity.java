@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
             String sign = user.getDescription();
 
             ImageLoader.getInstance().displayImage(avatar, mAvatar);
-            mUsername.setText(username);
+            mUsername.setText("@" + username);
             mUserinfo.setText(sign);
             mUserExtra.setText("Tap avatar to logout");
             try {

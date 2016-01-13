@@ -124,7 +124,10 @@ public class CurrentObservationFragment extends Fragment {
             @Override
             public void onRefresh() {
                 swipeRefreshLayout.setRefreshing(true);
-                LocationUtil.getLocation(getContext());
+//                LocationUtil.getLocation(getContext());
+                WeatherApi.getCurrentWeather(GlobalConstant.latitude, GlobalConstant.logitude);
+                WeatherApi.getTendayForecast(GlobalConstant.latitude, GlobalConstant.logitude);
+                WeatherApi.get24HoursForecast(GlobalConstant.latitude, GlobalConstant.logitude);
             }
         });
     }

@@ -4,7 +4,9 @@
     android:layout_height="190dp"
     android:background="?attr/colorPrimaryDark"
     android:orientation="vertical"
-    android:padding="16dp"
+    android:paddingTop="16dp"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
     android:id="@+id/header"
     >
     <!--一般都在父控件上设16dp的padding，这儿设了24dp的margin，不知道好不好看-->
@@ -19,16 +21,16 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Touch avatar to login"
+        android:text="Tap avatar to login"
         android:textSize="14sp"
         android:textColor="#FFF"
         android:textStyle="bold"
         android:gravity="left"
         android:paddingBottom="4dp"
+        android:layout_marginTop="4dp"
         android:id="@+id/username"
-        android:layout_above="@+id/userinfo"
-        android:layout_alignLeft="@+id/profile_image"
-        android:layout_alignStart="@+id/profile_image" />
+        android:layout_below="@id/profile_image"
+        android:layout_alignLeft="@+id/profile_image" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -40,9 +42,8 @@
         android:gravity="left"
         android:paddingBottom="4dp"
         android:id="@+id/userinfo"
-        android:layout_above="@+id/extra"
-        android:layout_alignLeft="@+id/profile_image"
-        android:layout_alignStart="@+id/profile_image" />
+        android:layout_below="@id/username"
+        android:layout_alignLeft="@+id/profile_image" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -54,7 +55,6 @@
         android:textSize="14sp"
         android:textColor="#fff"
         android:layout_alignParentBottom="true"
-        android:layout_alignLeft="@+id/userinfo"
-        android:layout_alignStart="@+id/userinfo" />
+        android:layout_alignLeft="@+id/profile_image" />
 
 </RelativeLayout>

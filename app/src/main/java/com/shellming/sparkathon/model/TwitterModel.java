@@ -15,13 +15,14 @@ public class TwitterModel {
     private String avatar;
     private boolean isFavorite;
     private Long twitterId;
+    private String userName;
 
     public static TwitterModel fromTwitter(Status status){
         String content = status.getText();
         if(content == null)
             return null;
         String[] parts = content.split("\n");
-        if(parts.length != 3)
+        if(parts.length < 3)
             return null;
         if(!parts[0].equals(GlobalConstant.TWITTER_TAG))
             return null;
@@ -32,6 +33,7 @@ public class TwitterModel {
         model.setAvatar(status.getUser().getProfileImageURL());
         model.setFavorite(status.isFavorited());
         model.setTwitterId(status.getId());
+        model.setUserName(status.getUser().getName());
 
         return model;
     }
@@ -46,6 +48,14 @@ public class TwitterModel {
         dateTime = date + ", " + time;
         this.location = location;
         like = 0;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     @Override
